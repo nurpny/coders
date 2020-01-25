@@ -1,70 +1,72 @@
-const crypto = require('crypto')
-const Sequelize = require('sequelize')
-const db = require('../db')
+// const crypto = require('crypto')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+const validator = require('validator')
+const bcrypt = require("bcrypt");
+const SALT_WORK_FACTOR = 10;
 
-const User = db.define('user', {
+// const db = require('../db')
+
+const UserSchema = new Schema({
   email: {
-    type: Sequelize.STRING,
+    type: String,
+    required: true,
     unique: true,
-    allowNull: false
+    trim: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error('Email is invalid')
+      }
+    }
   },
   password: {
-    type: Sequelize.STRING,
-    // Making `.password` act like a func hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('password')
-    }
+    type: String,
   },
   salt: {
-    type: Sequelize.STRING,
-    // Making `.salt` act like a function hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('salt')
-    }
+    type: String,
   },
   googleId: {
-    type: Sequelize.STRING
+    type: String,
+  },
+  languages: {
+    type: Array,
+  },
+  interests: {
+    type: Array,
   }
 })
 
-module.exports = User
 
 /**
- * instanceMethods
+ * Password Save
  */
-User.prototype.correctPassword = function(candidatePwd) {
-  return User.encryptPassword(candidatePwd, this.salt()) === this.password()
-}
 
-/**
- * classMethods
- */
-User.generateSalt = function() {
-  return crypto.randomBytes(16).toString('base64')
-}
+UserSchema.pre('save', function (next) {
+  var user = this;
 
-User.encryptPassword = function(plainText, salt) {
-  return crypto
-    .createHash('RSA-SHA256')
-    .update(plainText)
-    .update(salt)
-    .digest('hex')
-}
+  // only hash the password if it has been modified (or is new)
+  if (!user.isModified('password')) return next();
 
-/**
- * hooks
- */
-const setSaltAndPassword = user => {
-  if (user.changed('password')) {
-    user.salt = User.generateSalt()
-    user.password = User.encryptPassword(user.password(), user.salt())
-  }
-}
+  // generate a salt
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+    if (err) return next(err);
 
-User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword)
-User.beforeBulkCreate(users => {
-  users.forEach(setSaltAndPassword)
-})
+    // hash the password using our new salt
+    bcrypt.hash(user.password, salt, function (err, hash) {
+      if (err) return next(err);
+
+      // override the cleartext password with the hashed one
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+UserSchema.methods.comparePassword = function (candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
+};
+
+module.exports = mongoose.model("User", UserSchema);
