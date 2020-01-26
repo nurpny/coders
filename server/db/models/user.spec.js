@@ -47,24 +47,39 @@ var testUser = new User({
 });
 
 // save user to database
-testUser.save(function (err) {
-  if (err) throw err;
+let testing = async () => {
+  // await testUser.save()
+  try {
+    let user = await User.findOne({ email: 'jmar777@gmail.com' })
+    console.log("user>>>", user);
+    let response1 = await user.comparePassword('Password123');
+    console.log("Password123>>>", response1)
+    let response2 = await user.comparePassword('Password234');
+    console.log("Password>>>", response2)
+  } catch(err) {
+    console.err(err)
+  }
 
+}
 
-  // fetch user and test password verification
-  User.findOne({ email: 'jmar777@gmail.com' }, function (err, user) {
-    if (err) throw err;
+testing();
 
-    // test a matching password
-    user.comparePassword('Password123', function (err, isMatch) {
-      if (err) throw err;
-      console.log('Password123:', isMatch); // -> Password123: true
-    });
+// testUser.save(function (err) {
+//   if (err) throw err;
+//   // fetch user and test password verification
+//   User.findOne({ email: 'jmar777@gmail.com' }, function (err, user) {
+//     if (err) throw err;
 
-    // test a failing password
-    user.comparePassword('123Password', function (err, isMatch) {
-      if (err) throw err;
-      console.log('123Password:', isMatch); // -> 123Password: false
-    });
-  });
-})
+//     // test a matching password
+//     user.comparePassword('Password123', function (err, isMatch) {
+//       if (err) throw err;
+//       console.log('Password123:', isMatch); // -> Password123: true
+//     });
+
+//     // test a failing password
+//     user.comparePassword('123Password', function (err, isMatch) {
+//       if (err) throw err;
+//       console.log('123Password:', isMatch); // -> 123Password: false
+//     });
+//   });
+// })

@@ -19,7 +19,7 @@
     "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
-    "start-server": "ts-node-dev server/index.ts",
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" "
   },
   "lint-staged": {
@@ -40,6 +40,7 @@
     "axios": "^0.19.0",
     "bcrypt": "^3.0.7",
     "compression": "^1.7.3",
+    "connect-mongo": "^3.2.0",
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
     "express-session": "^1.15.1",

@@ -23,7 +23,10 @@ const removeUser = () => ({type: REMOVE_USER})
  */
 export const me = () => async dispatch => {
   try {
+
     const res = await axios.get('/auth/me')
+
+
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
@@ -33,7 +36,9 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method) => async dispatch => {
   let res
   try {
+    console.log("LINE26");
     res = await axios.post(`/auth/${method}`, {email, password})
+    console.log("LINE28", res.data);
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }

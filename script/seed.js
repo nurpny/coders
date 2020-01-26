@@ -8,26 +8,19 @@ const mongoose = require('mongoose');
 async function seed() {
 
   try {
-    await User.remove({}, function (err) {
-      console.log('Users removed')
-    });
-
+    await User.remove();
     let newUser1 = new User({
       email: 'thanos@gmail.com',
       password: 'Password123'
     })
-
     let newUser2 = new User({
       email: 'groot@gmail.com',
       password: 'Password234'
     })
-
-    await newUser1.save(function (err) {
-      console.log("Thanos created")
-    })
-    await newUser2.save(function (err) {
-      console.log("Groot created")
-    })
+    await newUser1.save();
+    console.log(newUser1.email + " saved")
+    await newUser2.save();
+    console.log(newUser2.email + " saved")
   } catch (err) {
     console.error(err)
   }
@@ -45,7 +38,7 @@ async function runSeed() {
     process.exitCode = 1
   } finally {
     console.log('closing db connection')
-    // await mongoose.connection.close()
+    await mongoose.connection.close()
     console.log('db connection closed')
   }
 }
