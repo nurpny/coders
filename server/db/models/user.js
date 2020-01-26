@@ -21,6 +21,7 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
+    select: false
   },
   salt: {
     type: String,
@@ -62,9 +63,10 @@ UserSchema.pre('save', function (next) {
   });
 });
 
-UserSchema.methods.comparePassword = async function (candidatePassword) {
+
+UserSchema.methods.comparePassword = async function (candidatePassword, userPW) {
   try {
-    const result = await bcrypt.compare(candidatePassword, this.password)
+    const result = await bcrypt.compare(candidatePassword, userPW)
     return result;
   } catch (err) {
     console.error(err)

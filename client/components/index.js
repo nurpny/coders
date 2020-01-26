@@ -6,4 +6,4 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home.tsx'
 export {default as Welcome} from './welcome.tsx'
-export {Login, Signup} from './auth-form'
+export {Login, Signup} from './auth-form.tsx'

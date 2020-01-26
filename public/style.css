@@ -1,6 +1,6 @@
 body {
   font-family: monospace;
-  background-color: black;
+  background-color: black
 }
 
 a {
@@ -22,13 +22,12 @@ form div {
 }
 
 #app {
-  background-color: black;
-
   height: 100vh;
   margin: 0px;
   padding: 0px;
   background-color: black;
 }
+
 
 #welcome {
   font-family: 'IBM Plex Mono', monospace;
@@ -38,19 +37,15 @@ form div {
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  margin: 0px 50px
+  margin: 0px 50px;
+  background-color: black;
 }
 
 #welcome-enter{
-  width: 10em;
+  width: 5em;
   align-self: flex-end;
   font-size: 1em;
-  font-family: 'IBM Plex Mono', monospace;
-}
-
-
-button {
-	background: #7C7C7C;
+  background: #7C7C7C;
 	border-bottom: 6px inset rgba(0,0,0,.5);
 	border-left: 6px inset rgba(0,0,0,.5);
 	border-right: 6px inset rgba(255,255,255,.5);
@@ -61,6 +56,37 @@ button {
 	margin: 1rem;
 	min-width: 50px;
 	padding: .1rem;
-	text-transform: uppercase;
-	width: auto;
+  width: auto;
+  font-family: 'VT323', monospace ;
 }
+
+#login-container{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margIN: 0px 50px;
+}
+
+#login-container {
+  color: #f7f779;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+#login {
+  max-width: 500px
+}
+
+form input {
+  border: 1px solid darkgrey;
+  font-family: 'IBM Plex Mono', monospace;
+  border-radius: 5px;
+}
+
+
+form button {
+  font-family: 'IBM Plex Mono', monospace;
+  border: 1px solid #f7f779;
+  border-radius: 1px;
+}
+
