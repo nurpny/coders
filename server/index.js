@@ -7,7 +7,6 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
 const db = require('./db/db')
 const { User } = require('./db/models')
-console.log("DB???", db.models.User)
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
@@ -34,9 +33,7 @@ passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.find({id: id})
-    console.log("user???", user)
-//    console.log("DB???", db)
+    const user = await User.find({_id: id})
     done(null, user)
   } catch (err) {
     done(err)
