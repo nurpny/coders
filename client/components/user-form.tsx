@@ -25,8 +25,8 @@ class Signup extends React.Component<Props, LocalState> {
       'email': "",
       'password': "",
       'interests': {
-        'code-review': false,
-        'pair-project': false,
+        'code review': false,
+        'pair project': false,
       },
       'languages': {
         'vanilla JS': false,
@@ -83,21 +83,25 @@ class Signup extends React.Component<Props, LocalState> {
       <div id="user-form-container">
         <form id="signup" onSubmit={this.handleSubmit} name={name}>
           <div>
-            <label htmlFor="email"> <small>Email</small> </label>
+            <label htmlFor="email"> Email </label>
             <input name="email" type="text" onChange={this.handleChange}/>
           </div>
           <div>
-            <label htmlFor="password"><small>Password</small> </label>
+            <label htmlFor="password">Password </label>
             <input name="password" type="password" onChange={this.handleChange}/>
           </div>
+          <div>
           <label> Interests (Choose all that apply)
             {this.renderItems("interests")}
           </label>
+          </div>
+          <div>
           <label> Languages (Choose all that apply)
             {this.renderItems("languages")}
           </label>
+          </div>
           <div>
-            <button type="submit">Signup</button>
+            <button type="submit">Sign Up</button>
           </div>
           {/* {error && error.response && <div> {error.response.data} </div>} */}
         </form>

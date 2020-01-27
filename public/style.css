@@ -113,3 +113,20 @@ form button {
   margin: 0em 5em;
 }
 
+#signup{
+  display: flex;
+  flex-direction: column;
+  border-radius: 1em;
+  margin: 2ex;
+  max-width: 400px;
+  padding: 1em;
+  background-color: #d1d1d1;
+  color: black;
+}
+
+#signup button{
+  border-radius: 5px;
+  background-color: #5c5b5b;
+  border: none;
+  color: white;
+}
