@@ -72,13 +72,12 @@ export const signup = (email: string, password: string, interests: Array<string>
   let res;
   try {
     res = await axios.post(`/auth/signup`, { email, password, interests, languages})
-    console.log(res.data);
   } catch (authError) {
     return dispatch(getUser({ error: authError }))
   }
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/userhome')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
