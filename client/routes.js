@@ -2,41 +2,41 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {Login, Signup, UserHome, Welcome} from './components'
-import {me} from './store'
+// import {fetchingUser} from './store/user'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData()
-  }
+  // componentDidMount() {
+  //   this.props.loadInitialData()
+  // }
   render() {
     return (
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/userhome" component={UserHome} />
-        <Route path="/" component={Welcome} />
+        <Route path="/" component={Welcome} userId = {this.props.userId}/>
       </Switch>
     )
   }
 }
 
 
-const mapState = state => {
-  return {
-    userId: state.user._id
-  }
-}
+// const mapState = state => {
+//   return {
+//     userId: state.user._id
+//   }
+// }
 
-const mapDispatch = dispatch => {
-  return {
-    loadInitialData: () => {
-      dispatch(me())
-    }
-  }
-}
+// const mapDispatch = dispatch => {
+//   return {
+//     loadInitialData: () => {
+//       dispatch(fetchingUser())
+//     }
+//   }
+// }
 
 /**
  * CONTAINER
@@ -44,5 +44,5 @@ const mapDispatch = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(Routes)
 

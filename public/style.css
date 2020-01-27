@@ -1,6 +1,7 @@
 body {
   font-family: monospace;
-  background-color: black
+  background-color: black;
+  color: white;
 }
 
 a {
@@ -83,10 +84,32 @@ form input {
   border-radius: 5px;
 }
 
-
 form button {
   font-family: 'IBM Plex Mono', monospace;
   border: 1px solid #f7f779;
   border-radius: 1px;
+}
+
+.profile-container {
+  border: 1px solid white;
+  margin: 2em;
+  padding: 2em;
+  border-radius: 1em;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inner-profile-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#user-info{
+  margin: 0em 5em;
 }
 

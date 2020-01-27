@@ -3,16 +3,22 @@ import * as ReactDom from "react-dom";
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import history from '../history'
+import {fetchingUser} from '../store/user'
 
-export default class Welcome extends React.Component<any, any> {
+
+class Welcome extends React.Component<any, any> {
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this)
   }
 
+  componentDidMount() {
+    this.props.loadInitialData()
+  }
+
   handleClick() {
-    if(!!this.props.userId) {history.push('/user-home')}
+    if(!!this.props.user._id) {history.push('/userhome')}
     else {history.push('/login')}
   }
 
@@ -27,3 +33,18 @@ export default class Welcome extends React.Component<any, any> {
   }
 }
 
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    loadInitialData: () => {
+      dispatch(fetchingUser())
+    }
+  }
+}
+
+export default (connect(mapState, mapDispatch)(Welcome))

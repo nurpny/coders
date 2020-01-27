@@ -13,6 +13,7 @@ class AuthForm extends React.Component<any, any> {
   }
 
   handleSignin() {
+    console.log("LINE16 MOVE TO SIGNIN PAGE")
     {history.push('/signin')}
   }
 
