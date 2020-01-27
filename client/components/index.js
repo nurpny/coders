@@ -3,7 +3,8 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export {default as Navbar} from './navbar'
+
 export {default as UserHome} from './user-home.tsx'
 export {default as Welcome} from './welcome.tsx'
-export {Login, Signup} from './log-in.tsx'
+export {default as Login} from './log-in.tsx'
+export {default as Signup} from './sign-up.tsx'

@@ -14,11 +14,7 @@ type User = {
   interests: Array<string>
 }
 
-
-
 const UserHome = ({user, handleClick}: Props) => {
-  console.log("user", user, "handleClick",
-  handleClick);
   return (
     <div className="profile-container">
       <div className="profile-header">

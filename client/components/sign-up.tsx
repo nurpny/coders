@@ -1,7 +1,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {auth} from '../store/user'
-import history from '../history'
 
 /**
  * COMPONENT
@@ -11,16 +10,7 @@ type Props = {
   error: any
 }
 
-class Login extends React.Component <Props, any> {
-
-  constructor() {
-    super()
-    this.handleSignin = this.handleSignin.bind(this)
-  }
-
-  handleSignin() {
-    history.push('/sign-up')
-  }
+class Signup extends React.Component <Props, any> {
 
   render () {
     const {handleSubmit, error} = this.props
@@ -49,26 +39,13 @@ class Login extends React.Component <Props, any> {
   }
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
-const mapLogin = state => {
+const mapSignup = state => {
   return {
+    name: 'signup',
+    displayName: 'Sign Up',
     error: state.user.error
   }
 }
-
-// const mapSignup = state => {
-//   return {
-//     name: 'signup',
-//     displayName: 'Sign Up',
-//     error: state.user.error
-//   }
-// }
 
 const mapDispatch = dispatch => {
   return {
@@ -81,5 +58,5 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapLogin, mapDispatch)(Login)
-// export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export default connect(,)(Signup)
+
