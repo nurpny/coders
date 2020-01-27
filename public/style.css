@@ -113,6 +113,10 @@ form button {
   margin: 0em 5em;
 }
 
+#user-info > div {
+  margin: 2em 0em;
+}
+
 #signup{
   display: flex;
   flex-direction: column;

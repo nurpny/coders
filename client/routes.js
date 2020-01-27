@@ -17,6 +17,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/userhome" component={UserHome} />
+        <Route path="/languages/:id" component={UsersList} />
         <Route path="/" component={Welcome} userId = {this.props.userId}/>
       </Switch>
     )
