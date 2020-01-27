@@ -68,10 +68,10 @@ export const auth = (email, password) => async dispatch => {
   }
 }
 
-export const signup = (email, password, method) => async dispatch => {
+export const signup = (email: string, password: string, interests: Array<string>, languages: Array<string>): any => async dispatch => {
   let res;
   try {
-    res = await axios.post(`/auth/${method}`, { email, password })
+    res = await axios.post(`/auth/signup`, { email, password, interests, languages})
     console.log(res.data);
   } catch (authError) {
     return dispatch(getUser({ error: authError }))
@@ -83,6 +83,7 @@ export const signup = (email, password, method) => async dispatch => {
     console.error(dispatchOrHistoryErr)
   }
 }
+
 
 export const logout = () => async dispatch => {
   try {

@@ -12,6 +12,7 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
+      // *** to be addressed
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {
@@ -23,7 +24,9 @@ router.post('/signup', async (req, res, next) => {
   try {
     const newUser = new User({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      interests: req.body.interests,
+      languages: req.body.languages,
     })
     const user = await newUser.save()
     req.login(user, err => (err ? next(err) : res.json(user)))

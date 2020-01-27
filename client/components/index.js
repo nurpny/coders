@@ -7,4 +7,4 @@
 export {default as UserHome} from './user-home.tsx'
 export {default as Welcome} from './welcome.tsx'
 export {default as Login} from './log-in.tsx'
-export {default as Signup} from './sign-up.tsx'
+export {SignupContainer as Signup} from './user-form.tsx'

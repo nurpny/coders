@@ -19,7 +19,7 @@ class Login extends React.Component <Props, any> {
   }
 
   handleSignin() {
-    history.push('/sign-up')
+    history.push('/signup')
   }
 
   render () {
