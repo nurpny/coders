@@ -32,7 +32,7 @@ const UserHome = ({user, handleClick}: Props) => {
           height={400}
           width={400}
         />
-        <div id="user-info">
+        <div id="profile">
           <div> name: {user.name} </div>
           <div> email: {user.email} </div>
           <div> <label>languages:</label> {user.languages &&
@@ -69,6 +69,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(UserHome)
-/**
- * PROP TYPES
- */

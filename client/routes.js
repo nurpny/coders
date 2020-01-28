@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Login, Signup, UserHome, Welcome} from './components'
-// import {fetchingUser} from './store/user'
+import {Login, Signup, UserHome, Welcome, UsersList} from './components'
 
 /**
  * COMPONENT
@@ -17,7 +16,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/userhome" component={UserHome} />
-        <Route path="/languages/:id" component={UsersList} />
+        <Route path="/users/:id" component={UsersList} />
         <Route path="/" component={Welcome} userId = {this.props.userId}/>
       </Switch>
     )
