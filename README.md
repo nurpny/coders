@@ -1,6 +1,6 @@
 # Coders
 ##### A social networking website for programmers.
-Coders is a social networking website that allows programmers to connect with other programmers to work on pair programming/
+Coders is a social networking website that allows programmers to connect with other programmers to work on pair programming/code review/project.
 
 ## Technologies Used
 Front-end: Typescript, React, Redux, React-Redux
