@@ -25,7 +25,11 @@ type Props = {
   error: any
 }
 
-class Login extends React.Component <Props, any> {
+type State = {
+  handleSignin: () => void;
+}
+
+class Login extends React.Component <Props, State> {
 
   constructor(props:Props) {
     super(props)
