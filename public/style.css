@@ -29,36 +29,9 @@ form div {
   background-color: black;
 }
 
-#welcome {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 150%;
-  color: #39e600;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-  margin: 0px 50px;
-  background-color: black;
-}
 
-#welcome-enter{
-  width: 5em;
-  align-self: flex-end;
-  font-size: 1em;
-  background: #7C7C7C;
-	border-bottom: 6px inset rgba(0,0,0,.5);
-	border-left: 6px inset rgba(0,0,0,.5);
-	border-right: 6px inset rgba(255,255,255,.5);
-	border-top: 6px inset rgba(255,255,255,.5);
-	box-sizing: border-box;
-	color: white;
-	display: inline-block;
-	margin: 1rem;
-	min-width: 50px;
-	padding: .1rem;
-  width: auto;
-  font-family: 'VT323', monospace ;
-}
+
+
 
 #login-container{
   height: 100vh;
@@ -155,4 +128,8 @@ form button {
 
 .user-info > div {
   margin: 2px 0px
+}
+
+#email-img {
+  background: black;
 }

@@ -73,7 +73,6 @@ class Signup extends React.Component<Props, LocalState> {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log("state>>>", this.state);
     this.props.onSubmit(this.state);
   }
 
