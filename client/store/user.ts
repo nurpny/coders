@@ -68,7 +68,8 @@ export const auth = (email, password) => async dispatch => {
   }
 }
 
-export const signup = (email: string, password: string, interests: Array<string>, languages: Array<string>): any => async dispatch => {
+export const signup = (email: string, password: string, interests: Array<string>, languages: Array<string>): any
+  => async dispatch => {
   let res;
   try {
     res = await axios.post(`/auth/signup`, { email, password, interests, languages})

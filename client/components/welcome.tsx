@@ -1,8 +1,7 @@
 import * as React from "react";
-import * as ReactDom from "react-dom";
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import history from '../history'
-import {fetchingUser} from '../store/user'
+import { fetchingUser } from '../store/user'
 import styled from 'styled-components';
 
 
@@ -44,8 +43,8 @@ class Welcome extends React.Component<any, any> {
   }
 
   handleClick() {
-    if(!!this.props.user._id) {history.push('/userhome')}
-    else {history.push('/login')}
+    if (!!this.props.user._id) { history.push('/userhome') }
+    else { history.push('/login') }
   }
 
   render() {
@@ -65,7 +64,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch : React.Dispatch<any>) => {
   return {
     loadInitialData: () => {
       dispatch(fetchingUser())

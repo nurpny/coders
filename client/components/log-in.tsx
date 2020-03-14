@@ -2,10 +2,24 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {auth} from '../store/user'
 import history from '../history'
+import styled from 'styled-components'
 
-/**
- * COMPONENT
- */
+
+const Container = styled.section`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0px 50px;
+  color: #f7f779;
+  font-family: 'IBM Plex Mono', monospace;
+`
+
+const LoginForm = styled.form`
+  max-width: 500px;
+`
+
+
 type Props = {
   handleSubmit: () => void;
   error: any
@@ -13,8 +27,8 @@ type Props = {
 
 class Login extends React.Component <Props, any> {
 
-  constructor() {
-    super()
+  constructor(props:Props) {
+    super(props)
     this.handleSignin = this.handleSignin.bind(this)
   }
 
@@ -25,8 +39,8 @@ class Login extends React.Component <Props, any> {
   render () {
     const {handleSubmit, error} = this.props
     return (
-      <div id="login-container">
-      <form id="login" onSubmit={handleSubmit} name={name}>
+    <Container>
+      <LoginForm onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email"> <small>Email</small> </label>
           <input name="email" type="text" />
@@ -39,32 +53,27 @@ class Login extends React.Component <Props, any> {
           <button type="submit">Login</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </LoginForm>
       <form onSubmit={this.handleSignin}>
         <div><small>Click here to sign up instead</small> </div>
         <button type="submit">Sign up</button>
       </form>
-      </div>
+
+      </Container>
     )
   }
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
+
 const mapLogin = state => {
   return {
     error: state.user.error
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch : React.Dispatch<any>) => {
   return {
-    handleSubmit(evt) {
+    handleSubmit(evt:React.SyntheticEvent) {
       evt.preventDefault()
       const email = evt.target.email.value
       const password = evt.target.password.value
@@ -74,4 +83,4 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapLogin, mapDispatch)(Login)
-// export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+

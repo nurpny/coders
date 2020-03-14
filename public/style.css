@@ -1,5 +1,5 @@
 body {
-  font-family: monospace;
+  font-family: 'IBM Plex Mono', monospace;
   background-color: black;
   color: white;
 }
@@ -30,26 +30,6 @@ form div {
 }
 
 
-
-
-
-#login-container{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margIN: 0px 50px;
-}
-
-#login-container {
-  color: #f7f779;
-  font-family: 'IBM Plex Mono', monospace;
-}
-
-#login {
-  max-width: 500px
-}
-
 form input {
   border: 1px solid darkgrey;
   font-family: 'IBM Plex Mono', monospace;
@@ -58,8 +38,9 @@ form input {
 
 form button {
   font-family: 'IBM Plex Mono', monospace;
-  border: 1px solid #f7f779;
-  border-radius: 1px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
 }
 
 .profile-container {
