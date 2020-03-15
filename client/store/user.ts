@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from '../history'
-import { User } from '../types'
-
+import { User, UserError } from '../types'
+import { Dispatch } from "react";
 
 /**
  * ACTION TYPES
@@ -44,7 +44,7 @@ const removeUser: () => UserActionType =
 /**
  * THUNK CREATORS
  */
-export const fetchingUser = () => async dispatch => {
+export const fetchingUser = () => async (dispatch:Dispatch<any>) => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
@@ -53,7 +53,7 @@ export const fetchingUser = () => async dispatch => {
   }
 }
 
-export const auth = (email, password) => async dispatch => {
+export const auth = (email:string, password:string) => async (dispatch:Dispatch<any>)  => {
   let res;
   try {
     res = await axios.post(`/auth/login`, { email, password })
@@ -68,8 +68,7 @@ export const auth = (email, password) => async dispatch => {
   }
 }
 
-export const signup = (email: string, password: string, interests: Array<string>, languages: Array<string>): any
-  => async dispatch => {
+export const signup = (email: string, password: string, interests: Array<string>, languages: Array<string>) => async (dispatch:Dispatch<any>)  => {
   let res;
   try {
     res = await axios.post(`/auth/signup`, { email, password, interests, languages})

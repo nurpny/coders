@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {auth} from '../store/user'
 import history from '../history'
 import styled from 'styled-components'
-
+import { State } from '../types'
 
 const Container = styled.section`
   height: 100vh;
@@ -22,14 +22,14 @@ const LoginForm = styled.form`
 
 type Props = {
   handleSubmit: () => void;
-  error: any
+  error: object;
 }
 
-type State = {
+type LocalState = {
   handleSignin: () => void;
 }
 
-class Login extends React.Component <Props, State> {
+class Login extends React.Component <Props, LocalState> {
 
   constructor(props:Props) {
     super(props)
@@ -69,7 +69,7 @@ class Login extends React.Component <Props, State> {
 }
 
 
-const mapLogin = state => {
+const mapLogin = (state : State) => {
   return {
     error: state.user.error
   }

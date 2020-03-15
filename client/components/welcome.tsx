@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import history from '../history'
 import { fetchingUser } from '../store/user'
 import styled from 'styled-components';
-
+import { User, State } from '../types'
 
 const Wrapper = styled.section`
   font-family: 'IBM Plex Mono', monospace;
@@ -27,13 +27,20 @@ const Button = styled.button`
   border: 2px solid #39e600;
   border-radius: 3px;
 	padding: 0.1rem .3rem;
-`;
+`
 
+type Props = {
+  loadInitialData: () => void;
+  user: User
+}
 
+type ComponentState = {
+  handleClick: () => void;
+}
 
-class Welcome extends React.Component<any, any> {
+class Welcome extends React.Component<Props, ComponentState> {
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.handleClick = this.handleClick.bind(this)
   }
@@ -58,7 +65,7 @@ class Welcome extends React.Component<any, any> {
   }
 }
 
-const mapState = state => {
+const mapState = (state : State) => {
   return {
     user: state.user
   }

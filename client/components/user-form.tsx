@@ -1,15 +1,17 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { signup } from '../store/user'
-
+import { State } from '../types'
 /**
  * COMPONENT
  */
 type LocalState = {
   email: string
   password: string,
-  interests: Object
-  languages: Object
+  interests:
+    {'code review': boolean,
+     'pair project': boolean}
+  languages: object
 }
 
 type Props = {
@@ -19,7 +21,7 @@ type Props = {
 
 class Signup extends React.Component<Props, LocalState> {
 
-  constructor(props) {
+  constructor(props:Props) {
     super(props);
     this.state = {
       'email': "",
@@ -45,7 +47,7 @@ class Signup extends React.Component<Props, LocalState> {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(evt) {
+  handleChange(evt:Event) {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
@@ -54,14 +56,16 @@ class Signup extends React.Component<Props, LocalState> {
     return items.map((item, idx) => {
       return (
         <label key = {idx}>
-          <input type = "checkbox" name = {item} onChange = { (evt) => this.handleToggle(evt, stateType)} value={this.state.interests[item]} />
+          <input type = "checkbox" name = {item}
+          onChange = { (evt) => this.handleToggle(evt, stateType)}
+          value={this.state.interests[item]} />
           {item}
         </label>
       )
     })
   }
 
-  handleToggle(evt, stateType) {
+  handleToggle(evt: Event, stateType: string) {
     const val = evt.target.checked;
     const name = evt.target.name;
     let updatedList = {...this.state[stateType]}
@@ -71,7 +75,7 @@ class Signup extends React.Component<Props, LocalState> {
     })
   }
 
-  handleSubmit(evt) {
+  handleSubmit(evt: Event) {
     evt.preventDefault()
     this.props.onSubmit(this.state);
   }
@@ -102,20 +106,19 @@ class Signup extends React.Component<Props, LocalState> {
           <div>
             <button type="submit">Sign Up</button>
           </div>
-          {/* {error && error.response && <div> {error.response.data} </div>} */}
         </form>
       </div>
     )
   }
 }
 
-const mapState = state => {
+const mapState = (state : State) => {
   return {
     error: state.user.error
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch: React.Dispatch<any>) => {
   return {
     onSubmit(state:LocalState) {
       const {email, password, interests, languages} = state;
