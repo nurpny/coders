@@ -52,8 +52,8 @@ class UsersList extends React.Component<Props, LocalState> {
               <div>email:{user.email}
               <span><img id="email-img" src={url+"email-icon-bl.png"} height={20} width={20} onClick={this.showEmail}/></span>
               </div>
-              <div> interests: {user.interests && user.interests.map((interest, idx) => <span key={idx}>{interest}</span>)} </div>
-              <div>languages: {user.languages && user.languages.map((language, idx) => <span key={idx}>{language}</span>)}</div>
+              <div> interests: {user.interests && user.interests.join(", ")}</div>
+              <div>languages: {user.languages && user.languages.join(",")}</div>
             </div>
           </div>
         )}
