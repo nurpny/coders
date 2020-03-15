@@ -2,9 +2,22 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { signup } from '../store/user'
 import { State } from '../types'
-/**
- * COMPONENT
- */
+import styled from 'styled-components';
+
+// Styles
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  border-radius: 1em;
+  margin: 2ex;
+  max-width: 400px;
+  padding: 1em;
+  background-color: #d1d1d1;
+  color: black;
+`
+
+
+// Types
 type LocalState = {
   email: string
   password: string,
@@ -19,6 +32,8 @@ type Props = {
   error: any
 }
 
+
+// Component
 class Signup extends React.Component<Props, LocalState> {
 
   constructor(props:Props) {
@@ -47,7 +62,7 @@ class Signup extends React.Component<Props, LocalState> {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(evt:Event) {
+  handleChange(evt:React.SyntheticEvent<any>) {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
@@ -65,7 +80,7 @@ class Signup extends React.Component<Props, LocalState> {
     })
   }
 
-  handleToggle(evt: Event, stateType: string) {
+  handleToggle(evt: React.SyntheticEvent<any>, stateType: string) {
     const val = evt.target.checked;
     const name = evt.target.name;
     let updatedList = {...this.state[stateType]}
@@ -75,7 +90,7 @@ class Signup extends React.Component<Props, LocalState> {
     })
   }
 
-  handleSubmit(evt: Event) {
+  handleSubmit(evt: React.SyntheticEvent<any>) {
     evt.preventDefault()
     this.props.onSubmit(this.state);
   }
@@ -83,8 +98,7 @@ class Signup extends React.Component<Props, LocalState> {
   render() {
     const { error } = this.props
     return (
-      <div id="user-form-container">
-        <form id="signup" onSubmit={this.handleSubmit} name={name}>
+        <FormWrapper onSubmit={this.handleSubmit} name={name}>
           <div>
             <label htmlFor="email"> Email </label>
             <input name="email" type="text" onChange={this.handleChange}/>
@@ -106,8 +120,8 @@ class Signup extends React.Component<Props, LocalState> {
           <div>
             <button type="submit">Sign Up</button>
           </div>
-        </form>
-      </div>
+        </FormWrapper>
+
     )
   }
 }
@@ -129,5 +143,5 @@ const mapDispatch = (dispatch: React.Dispatch<any>) => {
   }
 }
 
-export const SignupContainer = connect(mapState, mapDispatch)(Signup)
+export default connect(mapState, mapDispatch)(Signup)
 
