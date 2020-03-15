@@ -4,6 +4,7 @@ export interface User {
   languages: Array<String>,
   interests: Array<String>,
   __v: number,
+  pic: string,
   error?: Error
 }
 

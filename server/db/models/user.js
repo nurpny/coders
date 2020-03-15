@@ -34,6 +34,10 @@ const UserSchema = new Schema({
   },
   interests: {
     type: Array,
+  },
+  pic: {
+    type: String,
+    default: 'https://i.insider.com/5ae75d4ebd967122008b4623'
   }
 })
 

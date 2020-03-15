@@ -43,43 +43,6 @@ form button {
   border-radius: 3px;
 }
 
-.profile-container {
-  border: 1px solid white;
-  margin: 2em;
-  padding: 2em;
-  border-radius: 1em;
-}
-
-.profile-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.inner-profile-container {
-  display: flex;
-  flex-direction: row;
-}
-
-#profile-info{
-  margin: 0em 5em;
-}
-
-#profile-info > div {
-  margin: 2em 0em;
-}
-
-#signup{
-  display: flex;
-  flex-direction: column;
-  border-radius: 1em;
-  margin: 2ex;
-  max-width: 400px;
-  padding: 1em;
-  background-color: #d1d1d1;
-  color: black;
-}
 
 #signup button{
   border-radius: 5px;
@@ -113,4 +76,12 @@ form button {
 
 #email-img {
   background: black;
+}
+
+#profile-info{
+  margin: 0em 5em;
+}
+
+#profile-info > div {
+  margin: 2em 0em;
 }

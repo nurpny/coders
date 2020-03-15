@@ -1,24 +1,27 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { User } from '../types'
+import { User, State } from '../types'
 import { fetchingUsersList } from '../store/users'
 
 const url = (process.env.NODE_ENV ==='production' ? 'HEROKUAPPPAGE' : 'http://localhost:8080/images/')
 
+
+// types
 type Props = {
-  users: Array<User>
+  users: Array<User>,
   onLoadUsersList: (tag: string) => void;
-  language: string
-  match: any
+  // language: string
+  // match: any
 }
 
-type State = {
+type LocalState = {
   showEmail: boolean
 }
 
-class UsersList extends React.Component<Props, State> {
+// component
+class UsersList extends React.Component<Props, LocalState> {
 
-  constructor(props) {
+  constructor(props:Props) {
     super(props)
     this.state = {
       showEmail: false
@@ -40,14 +43,16 @@ class UsersList extends React.Component<Props, State> {
           <div key={user._id} className='user-container'>
             <img
               id="user-pic"
-              src="https://i.insider.com/5ae75d4ebd967122008b4623"
+              src={user.pic}
               alt="profile-pic"
               height={100}
               width={100}
             />
             <div className="user-info">
-              <div>email:{user.email}<img id="email-img" src={url+"email-icon-bl.png"} height={20} width={20} onClick={this.showEmail}/></div>
-              <div>interests: {user.interests && user.interests.map((interest, idx) => <span key={idx}>{interest}</span>)}</div>
+              <div>email:{user.email}
+              <span><img id="email-img" src={url+"email-icon-bl.png"} height={20} width={20} onClick={this.showEmail}/></span>
+              </div>
+              <div> interests: {user.interests && user.interests.map((interest, idx) => <span key={idx}>{interest}</span>)} </div>
               <div>languages: {user.languages && user.languages.map((language, idx) => <span key={idx}>{language}</span>)}</div>
             </div>
           </div>
@@ -57,13 +62,13 @@ class UsersList extends React.Component<Props, State> {
   }
 }
 
-const mapState = (state) => {
+const mapState = (state : State) => {
   return {
     users: state.users
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch : React.Dispatch<any>) => {
   return {
     onLoadUsersList: (tag: String) => { dispatch(fetchingUsersList(tag)) }
   }

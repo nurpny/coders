@@ -62,7 +62,6 @@ class Login extends React.Component <Props, LocalState> {
         <div><small>Click here to sign up instead</small> </div>
         <button type="submit">Sign up</button>
       </form>
-
       </Container>
     )
   }
