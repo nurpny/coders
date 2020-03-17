@@ -7,7 +7,33 @@ import { fetchingUsersList } from '../store/users'
 import Select from 'react-select'
 
 // Styles
+const Container = styled.section`
+  display:flex;
+  flex-direction: column;
+  padding: 2em;
+  align-content: flex-end;
+`
 
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    borderBottom: '1px dotted pink',
+    color: state.isSelected ? 'red' : 'blue',
+    padding: 2,
+    width: 200,
+  }),
+  control: () => ({
+    // none of react-select's styles are passed to <Control />
+    width: 200,
+    color: 'white',
+  }),
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+
+    return { ...provided, opacity, transition };
+  }
+}
 
 // types
 type Option = {
@@ -49,8 +75,11 @@ class FilterableUsersList extends React.Component<any, LocalState> {
     const { selectedInterest } = this.state
 
     return (
-      <div>
+      <Container>
         <Select
+          styles={customStyles}
+          width='200px'
+          menuColor='red'
           value={selectedInterest}
           onChange={this.handleChange}
           options={interests}
@@ -69,7 +98,7 @@ class FilterableUsersList extends React.Component<any, LocalState> {
                 </div>
             )
         }
-      </div>
+      </Container>
     )
   }
 }

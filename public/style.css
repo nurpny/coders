@@ -51,24 +51,7 @@ form button {
   color: white;
 }
 
-.users-container{
-  display:flex;
-  flex-direction: column;
-  padding: 5em
-}
 
-.user-container{
-  display: flex;
-  flex-direction: row;
-  margin: 0em 1em;
-  padding: 1em 1em;
-  border: 1px solid white;
-  max-width: 800px;
-}
-
-.user-info{
-  margin: 0em 1em
-}
 
 .user-info > div {
   margin: 2px 0px

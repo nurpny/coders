@@ -1,8 +1,24 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { User, State } from '../types'
+import styled from 'styled-components'
+
 
 const url = (process.env.NODE_ENV ==='production' ? 'HEROKUAPPPAGE' : 'http://localhost:8080/images/')
+
+// styles
+const Container = styled.section`
+  display: flex;
+  flex-direction: row;
+  margin: 0em 1em;
+  padding: 1em 1em;
+  border: 1px solid white;
+  max-width: 800px;
+`
+
+const Info = styled.section`
+  margin: 0em 1em;
+`
 
 
 // types
@@ -29,11 +45,10 @@ class UsersList extends React.Component<Props, LocalState> {
     this.setState({showEmail: true})
   }
 
-
   render() {
     let { pic, email, interests, languages} = this.props.user
     return (
-          <div className='user-container'>
+          <Container>
             <img
               id="user-pic"
               src={pic}
@@ -41,14 +56,14 @@ class UsersList extends React.Component<Props, LocalState> {
               height={100}
               width={100}
             />
-            <div className="user-info">
+            <Info className="user-info">
               <div>email:{email}
               <span><img id="email-img" src={url+"email-icon-bl.png"} height={20} width={20} onClick={this.showEmail}/></span>
               </div>
               <div> interests: {interests.join(", ")}</div>
               <div>languages: {languages.join(",")}</div>
-            </div>
-          </div>
+            </Info>
+          </Container>
     )
   }
 }
