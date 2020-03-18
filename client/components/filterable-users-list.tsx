@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { fetchingUsersList } from '../store/users'
 import Select from 'react-select'
 
+
 // Styles
 const Container = styled.section`
   display:flex;
@@ -15,24 +16,23 @@ const Container = styled.section`
 `
 
 const customStyles = {
+  container: (base) => ({
+    ...base,
+    alignSelf: 'flex-end',
+    width: 300,
+  }),
   option: (provided, state) => ({
     ...provided,
-    borderBottom: '1px dotted pink',
-    color: state.isSelected ? 'red' : 'blue',
+    borderBottom: '1px dotted #b8b8b8',
     padding: 2,
-    width: 200,
+    width: 300,
+    background: state.isSelected ? '#b8b8b8' : 'white',
+    color: 'black'
   }),
-  control: () => ({
-    // none of react-select's styles are passed to <Control />
-    width: 200,
-    color: 'white',
-  }),
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = 'opacity 300ms';
-
-    return { ...provided, opacity, transition };
-  }
+  menu: (provided, state) => ({
+    ...provided,
+    border: '2px solid white',
+  })
 }
 
 // types
@@ -40,6 +40,7 @@ type Option = {
   value: 'string',
   label: 'string'
 }
+
 type LocalState = {
   filter: boolean
   selectedInterest: Option
@@ -50,7 +51,7 @@ class FilterableUsersList extends React.Component<any, LocalState> {
   constructor(props) {
     super(props)
     this.state = {
-      selectedInterest: null,
+      selectedInterest: {value:null, label:'Filter by Interests'},
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -61,18 +62,20 @@ class FilterableUsersList extends React.Component<any, LocalState> {
 
   handleChange(selectedInterest) {
     this.setState({ selectedInterest })
-    console.log("Option selected", this.state.selectedInterest)
   }
 
   render() {
-    const interests = this.props.users.reduce(
+    let interests = this.props.users.reduce(
       (acc: Array<string>, user: User) => acc.concat(user.interests), []).filter(
         (interest: string, idx: number, arr: Array<string>) =>
           arr.indexOf(interest) === idx).map(
             (interest: string) => { return { value: interest, label: interest } }
           )
-    console.log("interests", interests);
+    interests = [...interests, {value:null, label: 'All'}]
+    console.log('interests', interests)
+
     const { selectedInterest } = this.state
+    console.log("selectedInterest", selectedInterest);
 
     return (
       <Container>
@@ -83,8 +86,9 @@ class FilterableUsersList extends React.Component<any, LocalState> {
           value={selectedInterest}
           onChange={this.handleChange}
           options={interests}
+          placeholder = {"Filter By Interests"}
         />
-        {this.state.selectedInterest === null ?
+        {!this.state.selectedInterest.value ?
           this.props.users &&
           this.props.users.map((user: User) =>
             <div key={user._id}>
